@@ -1,0 +1,180 @@
+phishing_detector.py
+
+import re
+import pandas as pd
+from urllib.parse import urlparse
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+import joblib
+
+# ---------- Step 1: Feature Extraction from URL ----------
+def extract_features(url):
+    parsed = urlparse(url)
+    return {
+        "url_length": len(url),
+        "has_ip": 1 if re.match(r"^\d{1,3}(\.\d{1,3}){3}", parsed.netloc) else 0,
+        "num_dots": url.count('.'),
+        "has_https": 1 if url.startswith("https") else 0,
+        "has_at_symbol": 1 if '@' in url else 0,
+        "has_hyphen": 1 if '-' in url else 0,
+        "has_subdomain": 1 if len(parsed.netloc.split('.')) > 2 else 0
+    }
+
+# ---------- Step 2: Load Dataset ----------
+# Replace this with your combined PhishTank and GitHub dataset
+df = pd.read_csv("phishing_dataset.csv")
+
+# Apply feature extraction
+feature_df = df["url"].apply(lambda x: pd.Series(extract_features(x)))
+feature_df["label"] = df["label"]  # 1 for phishing, 0 for legitimate
+
+# ---------- Step 3: Train Model ----------
+X = feature_df.drop("label", axis=1)
+y = feature_df["label"]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Save the model
+joblib.dump(model, "phishing_rf_model.pkl")
+
+# Evaluate
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+
+
+
+
+RealTime Url Prediction Script
+
+# load_model_and_predict.py
+
+import joblib
+import pandas as pd
+from phishing_detector import extract_features
+
+# Load the saved model
+model = joblib.load("phishing_rf_model.pkl")
+
+# Function to predict a new URL
+def predict_url(url):
+    features = pd.DataFrame([extract_features(url)])
+    prediction = model.predict(features)[0]
+    return "Phishing" if prediction == 1 else "Legitimate"
+
+# Example
+url_to_check = "http://example-login-security-update.com"
+print(f"{url_to_check} is likely: {predict_url(url_to_check)}")
+
+
+
+
+
+Intstall 
+pip install pandas scikit-learn joblib tldextract
+
+Import Libraries
+import pandas as pd
+import numpy as np
+import re
+import tldextract
+from urllib.parse import urlparse
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix
+from sklearn.preprocessing import LabelEncoder
+import joblib
+
+Feature Extraction Function
+def extract_features(url):
+    features = {}
+    features['url_length'] = len(url)
+    features['has_ip'] = 1 if re.search(r'\d+\.\d+\.\d+\.\d+', url) else 0
+    features['num_dots'] = url.count('.')
+    features['has_at'] = 1 if '@' in url else 0
+    features['has_hyphen'] = 1 if '-' in url else 0
+    features['has_https'] = 1 if 'https' in url else 0
+    features['count_www'] = url.count('www')
+    
+    parsed = urlparse(url)
+    extracted = tldextract.extract(url)
+    
+    features['domain_length'] = len(extracted.domain)
+    features['subdomain_length'] = len(extracted.subdomain)
+    features['path_length'] = len(parsed.path)
+    features['num_params'] = len(parsed.query.split('&')) if parsed.query else 0
+    
+    return features
+
+
+
+
+Load and Preprocess Dataset
+Make sure your dataset has URL and Label columns (Label = 0 for safe, 1 for phishing).
+# Load dataset
+df = pd.read_csv("phishing_dataset.csv")
+
+# Extract features
+feature_list = []
+for url in df['URL']:
+    feature_list.append(extract_features(url))
+features_df = pd.DataFrame(feature_list)
+
+# Labels (ensure they're numeric)
+df['Label'] = LabelEncoder().fit_transform(df['Label'])
+
+# Final features and labels
+X = features_df
+y = df['Label']
+
+
+
+Train Test Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+
+
+
+
+Train Random Forest Classifier 
+rf = RandomForestClassifier(
+    n_estimators=200,
+    max_depth=None,
+    random_state=42,
+    n_jobs=-1,
+    class_weight='balanced'  # Handles class imbalance
+)
+rf.fit(X_train, y_train)
+
+
+
+
+
+Model Eval
+y_pred = rf.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Precision:", precision_score(y_test, y_pred))
+print("Recall:", recall_score(y_test, y_pred))
+print("F1 Score:", f1_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+
+
+
+Save Model
+# Save model and features list for browser integration or web plugin
+joblib.dump(rf, "phishing_random_forest_model.pkl")
+joblib.dump(X.columns.tolist(), "features_list.pkl")
+
+
+
+
+
