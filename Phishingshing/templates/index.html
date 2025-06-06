@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phishing URL Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 1.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .phishing {
+            color: #d9534f;
+        }
+        .legitimate {
+            color: #5cb85c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Phishing URL Detector</h2>
+        <input type="text" id="urlInput" placeholder="Enter URL to check" />
+        <button onclick="checkUrl()">Check URL</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function checkUrl() {
+            const url = document.getElementById('urlInput').value.trim();
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = '';
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    if (data.result === 'Phishing') {
+                        resultDiv.textContent = 'Warning: This URL is likely a PHISHING site!';
+                        resultDiv.className = 'result phishing';
+                    } else {
+                        resultDiv.textContent = 'This URL appears to be LEGITIMATE.';
+                        resultDiv.className = 'result legitimate';
+                    }
+                } else {
+                    resultDiv.textContent = 'Error: ' + (data.error || 'Unknown error');
+                    resultDiv.className = 'result';
+                }
+            } catch (error) {
+                resultDiv.textContent = 'Error: Could not connect to server.';
+                resultDiv.className = 'result';
+            }
+        }
+    </script>
+</body>
+</html>
