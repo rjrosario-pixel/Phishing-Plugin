@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blocking Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    nav img {
+      height: 40px;
+      margin-right: auto;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav .user {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    nav .user img {
+      border-radius: 50%;
+      height: 30px;
+      margin-left: 10px;
+    }
+
+    .page {
+      padding: 30px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .status-safe {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .status-phish {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .status-unknown {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .block-btn {
+      background-color: #ff4d4f;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+  <img src="logo(1).png" alt="Logo" />
+  <a href="Scanner.html">URL and Domain Scanner</a>
+  <a href="#" style="color: #007bff;">Blocking</a>
+  <a href="#">Dashboard</a>
+  <div class="user">
+    <span>Mami Oni</span>
+    <img src="profile.png" alt="User"/>
+  </div>
+</nav>
+
+
+  <div class="page">
+    <div class="container">
+      <div class="section-title">History</div>
+      <table>
+        <tr>
+          <th>Source URL</th>
+          <th>Domain Name</th>
+          <th>IP Address</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+        <tr>
+          <td>https://facebook.com</td>
+          <td>Facebook.com</td>
+          <td>192.168.10.10</td>
+          <td>14 Feb 2019</td>
+          <td><span class="status-safe">Safe</span></td>
+          <td><button class="block-btn">Block</button></td>
+        </tr>
+        <tr>
+          <td>https://paypal-account.ru</td>
+          <td>PayPal.com</td>
+          <td>186.76.34.11</td>
+          <td>14 Feb 2019</td>
+          <td><span class="status-unknown">Unknown</span></td>
+          <td><button class="block-btn">Block</button></td>
+        </tr>
+        <tr>
+          <td>https://netflix-helpercenter.site</td>
+          <td>Netflix.com</td>
+          <td>88.193.34.5</td>
+          <td>14 Feb 2019</td>
+          <td><span class="status-safe">Safe</span></td>
+          <td><button class="block-btn">Block</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="container">
+      <div class="section-title">Blacklist</div>
+      <table>
+        <tr>
+          <th>Source URL</th>
+          <th>Domain Name</th>
+          <th>IP Address</th>
+          <th>Risk Level</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+        <tr>
+          <td>https://Messenger.com</td>
+          <td>Messenger.com</td>
+          <td>192.10.10.1</td>
+          <td>5</td>
+          <td><span class="status-phish">Phish</span></td>
+          <td><button class="block-btn">Remove</button></td>
+        </tr>
+        <tr>
+          <td>https://Bisuya.net</td>
+          <td>Bisuya.net</td>
+          <td>192.7.27.8</td>
+          <td>4</td>
+          <td><span class="status-phish">Phish</span></td>
+          <td><button class="block-btn">Remove</button></td>
+        </tr>
+        <tr>
+          <td>https://Facebooklogin.com.ph</td>
+          <td>Facebook.com</td>
+          <td>192.168.10.8</td>
+          <td>5</td>
+          <td><span class="status-phish">Phish</span></td>
+          <td><button class="block-btn">Remove</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
