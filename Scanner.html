@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phishing Scanner</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f2f4ff;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 10px 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    nav a.active {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile img {
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 70px);
+      background: #e6eeff;
+    }
+
+    .scanner-box {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .scanner-box h2 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .scanner-box input[type="text"] {
+      width: 350px;
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .scanner-box button {
+      margin-left: 10px;
+      padding: 12px 20px;
+      background-color: #3b82f6;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .scanner-box button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="logo" />
+    </div>
+    <nav>
+      <a href="#" class="active">URL and Domain Scanner</a>
+      <a href="#">Blocking</a>
+      <a href="#">Dashboard</a>
+    </nav>
+    <div class="profile">
+      <img src="https://i.pravatar.cc/100?img=15" alt="User" />
+      <span>Mami Oni</span>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="scanner-box">
+      <h2>Scan Here to Check If the Link Is a Phishing Threat!</h2>
+      <input type="text" placeholder="Type any URL or Domain" />
+      <button>Scan</button>
+    </div>
+  </div>
+
+</body>
+</html>
