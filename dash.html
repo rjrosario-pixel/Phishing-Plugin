@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phishing Scanner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dash-body">
+
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="logo" />
+    </div>
+    <nav>
+      <a href="Scanner.html">URL and Domain Scanner</a>
+      <a href="BlockPage.html">Blocking</a>
+      <a href="dash.html" class="active">Dashboard</a>
+    </nav>
+        <div class="profile">
+            <nav class="notification-nav">
+            <span class="bell">🔔</span>
+            </nav>
+        <img src="https://i.pravatar.cc/100?img=15" alt="User" />
+        <span>Mami Oni</span>
+        </div>
+  </header>
+    <main class="container">
+    <h1>Dashboard</h1>
+    <div class="status-cards">
+      <div class="card green">
+        <p>Activity</p>
+        <h2>11</h2>
+        <p>You scanned 11 websites today</p>
+      </div>
+      <div class="card red">
+        <p>Block Threats</p>
+        <h2>2</h2>
+        <p>2 phishing URLs/Domains were blocked today</p>
+      </div>
+      <div class="card yellow">
+        <p>Alerts</p>
+        <h2>✅ Safe!</h2>
+        <p>You visited a verified site: https://www.example.com</p>
+      </div>
+      <div class="card gray">
+        <p>Blacklist Updates</p>
+        <h2>Updated 3 hours ago</h2>
+        <p>Your phishing blacklist is up to date</p>
+      </div>
+    </div>
+
+    <section class="chart-section">
+    <div class="section-header">
+        <h2>Phishing URLs and Domains Blocked</h2>
+        <select>
+        <option>Last 1 year</option>
+        <option>Last 6 months</option>
+        </select>
+    </div>
+    <div class="chart-placeholder">[Line chart placeholder]</div>
+    </section>
+
+    <section class="history">
+    <div class="section-header">
+      <h2>History</h2>
+      <select>
+        <option>Last 24 hours</option>
+        <option>Last 7 days</option>
+      </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Source URL</th>
+            <th>Domain Name</th>
+            <th>IP Address</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>https://Messanger.com</td>
+            <td>Messanger.com</td>
+            <td>192.10.20.1</td>
+            <td><span class="status legit">Legitimate</span></td>
+          </tr>
+          <tr>
+            <td>http://Bisaya.net</td>
+            <td>Bisaya.net</td>
+            <td>192.172.7.8</td>
+            <td><span class="status unknown">Unknown</span></td>
+          </tr>
+          <tr>
+            <td>http://Facebook.com.ph</td>
+            <td>Facebook.com</td>
+            <td>192.168.10.10</td>
+            <td><span class="status phish">Phish</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
